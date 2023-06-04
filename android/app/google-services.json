@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "219076327081",
+    "firebase_url": "https://hidden-firebase-834e1-default-rtdb.firebaseio.com",
+    "project_id": "hidden-firebase-834e1",
+    "storage_bucket": "hidden-firebase-834e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219076327081:android:1c1203c3b6d2b8a0611bb8",
+        "android_client_info": {
+          "package_name": "com.hidden.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219076327081-knobvqnbv7mcuoookh9ckq7drt2c0pt9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hidden.firebase",
+            "certificate_hash": "90e8e5d5bf83af767d0d1cbb11b51b68c7427231"
+          }
+        },
+        {
+          "client_id": "219076327081-2i8bmc0qhmpnsigjmgbh569fo9a0ed8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDH6Z9rUPBi2s6dg_YcJjjl65829XWprw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219076327081-2i8bmc0qhmpnsigjmgbh569fo9a0ed8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
