@@ -23,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -46,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
       Utility().toastMessage("Signup Successful!");
 
-      Timer(Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 2), () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
         });
 

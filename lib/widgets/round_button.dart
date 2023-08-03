@@ -16,7 +16,7 @@ class RoundButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Colors.deepPurple, borderRadius: BorderRadius.circular(10)),
-        child: Center(child: loading ? CircularProgressIndicator(color: Colors.white,) : Text(title, style: TextStyle(color: Colors.white),)),
+        child: Center(child: loading ? const CircularProgressIndicator(color: Colors.white,) : Text(title, style: TextStyle(color: Colors.white),)),
       ),
     );
   }
