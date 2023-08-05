@@ -1,5 +1,6 @@
 import 'package:firebase/ui/auth/login_with_number.dart';
 import 'package:firebase/ui/auth/signup_screen.dart';
+import 'package:firebase/ui/firestore/firestore_list_screen.dart';
 import 'package:firebase/ui/forgot_password.dart';
 import 'package:firebase/ui/posts/post_screen.dart';
 import 'package:firebase/utility/utility.dart';
@@ -7,7 +8,6 @@ import 'package:firebase/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -24,18 +24,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _auth = FirebaseAuth.instance;
 
+
   void login() {
     setState(() {
       isLoading = true;
     });
     _auth
         .signInWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passwordController.text.toString())
+        email: emailController.text.toString(),
+        password: passwordController.text.toString())
         .then((value) {
       Utility().toastMessage(value.user!.email.toString());
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PostScreen()));
+          context, MaterialPageRoute(builder: (context) => const PostScreen()));
       setState(() {
         isLoading = false;
       });
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: 'Email',
                             prefixIcon: Icon(Icons.alternate_email)),
                         validator: (value) {
@@ -126,12 +127,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 5,
               ),
               Align(alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ForgotPasswordScreen()));
-                    },
-                    child: Text('Forgot Password?')),
+                child: Column(
+                  children: [
+                    // IconButton(onPressed: _authenticate,
+                    //     icon: const Icon(Icons.panorama_fish_eye)),
+                    // if(_support_state)
+                    //   const Text('This device is supported')
+                    // else
+                    //   const Text('This device is not supported'),
+                    Row(children: [
+
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ForgotPasswordScreen()));
+                          },
+                          child: Text('Forgot Password?')),
+                    ],)
+
+                  ],
+                ),
               ),
               SizedBox(
                 height: 30.0,
@@ -153,7 +168,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginWithPhoneNumber()));
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => LoginWithPhoneNumber()));
                   },
                   child: Container(
                     height: 50,

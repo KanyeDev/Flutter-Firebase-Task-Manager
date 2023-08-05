@@ -42,7 +42,15 @@ dependencies:
   firebase_storage: ^11.0.10
   fluttertoast: ^8.1.2
   firebase_database: ^10.0.9
+  local_auth: ^2.1.6
   biometricx: ^0.0.2
+  biometric_signature: ^1.0.2
+  hive_flutter: ^1.1.0
+  camera: ^0.10.5+2
+  tflite_flutter: ^0.10.1
+  google_ml_kit: ^0.16.2
+  image: ^4.0.17
+  lottie: ^2.3.2
 
 
 

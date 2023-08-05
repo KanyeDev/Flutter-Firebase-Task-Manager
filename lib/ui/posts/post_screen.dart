@@ -77,31 +77,24 @@ class _PostScreenState extends State<PostScreen> {
                 defaultChild: Text('Hello'),
                 query: ref,
                 itemBuilder: (context, snapshot, animation, index) {
-                  final title = snapshot
-                      .child('title')
-                      .value
-                      .toString();
+                  final title = snapshot.child('title').value.toString();
 
-                  if (searchFilter.text.isEmpty) {
+                  if ((searchFilter.text.isEmpty) &&
+                      (snapshot.child('id').value.toString() ==
+                          auth.currentUser!.uid.toString())) {
                     return ListTile(
-                      title: Text(snapshot
-                          .child('title')
-                          .value
-                          .toString()),
-                      subtitle: Text(snapshot
-                          .child('id')
-                          .value
-                          .toString()),
+                      title: Text(snapshot.child('title').value.toString()),
+                      subtitle: Text(snapshot.child('time').value.toString()),
                       trailing: PopupMenuButton(
                         icon: Icon(Icons.more_vert),
-                        itemBuilder: (context) =>
-                        [
+                        itemBuilder: (context) => [
                           PopupMenuItem(
                               value: 1,
                               child: ListTile(
                                 onTap: () {
                                   Navigator.pop(context);
-                                  showMyDialog(title, snapshot.child('id').value.toString());
+                                  showMyDialog(title,
+                                      snapshot.child('id').value.toString());
                                 },
                                 leading: Icon(Icons.edit),
                                 title: Text('Edit'),
@@ -109,9 +102,12 @@ class _PostScreenState extends State<PostScreen> {
                           PopupMenuItem(
                               value: 1,
                               child: ListTile(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.pop(context);
-                                  ref.child(snapshot.child('id').value.toString()).remove();
+                                  ref
+                                      .child(
+                                          snapshot.child('id').value.toString())
+                                      .remove();
                                   Utility().toastMessage('Deleted');
                                 },
                                 leading: Icon(Icons.delete),
@@ -120,17 +116,13 @@ class _PostScreenState extends State<PostScreen> {
                         ],
                       ),
                     );
-                  } else if (title.toLowerCase().contains(
-                      searchFilter.text.toLowerCase().toLowerCase())) {
+                  } else if ((snapshot.child('id').value.toString() ==
+                          auth.currentUser!.uid.toString()) &&
+                      (title.toLowerCase().contains(
+                          searchFilter.text.toLowerCase().toLowerCase()))) {
                     return ListTile(
-                      title: Text(snapshot
-                          .child('title')
-                          .value
-                          .toString()),
-                      subtitle: Text(snapshot
-                          .child('id')
-                          .value
-                          .toString()),
+                      title: Text(snapshot.child('title').value.toString()),
+                      subtitle: Text(snapshot.child('id').value.toString()),
                     );
                   } else {
                     return Container();
@@ -156,20 +148,23 @@ class _PostScreenState extends State<PostScreen> {
             ),
           ),
           actions: [
-            TextButton(onPressed: (){
-              Navigator.pop(context);
-            }, child: Text('Cancle')),
-            TextButton(onPressed: (){
-
-              Navigator.pop(context);
-              ref.child(id).update({
-                'title' : editController.text.toLowerCase()
-              }).then((value){
-                Utility().toastMessage('Updated Successfully');
-              }).onError((error, stackTrace) {
-                Utility().toastMessage(error.toString());
-              });
-            }, child: Text('Update')),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancle')),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  ref.child(id).update({
+                    'title': editController.text.toLowerCase()
+                  }).then((value) {
+                    Utility().toastMessage('Updated Successfully');
+                  }).onError((error, stackTrace) {
+                    Utility().toastMessage(error.toString());
+                  });
+                },
+                child: Text('Update')),
           ],
         );
       },

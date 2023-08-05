@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/utility/utility.dart';
 import 'package:firebase/widgets/round_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +16,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
   bool isLoading = false;
   DatabaseReference databaseRef = FirebaseDatabase.instance.ref("Post");
   final postController = TextEditingController();
+  final auth = FirebaseAuth.instance;
   double topLeft = 0;
   double topRight = 20.0;
   double bottomLeft = 20.0;
   double bottomRight = 0;
   Color color = Colors.purple;
-  Icon icon = Icon(
+  Icon icon = const Icon(
     Icons.add,
     color: Colors.white,
   );
@@ -38,11 +41,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
             TextFormField(
               controller: postController,
               maxLines: 4,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: "What is on your mind?",
                   border: OutlineInputBorder()),
             ),
-            SizedBox(height: 30.0),
+            const SizedBox(height: 30.0),
             RoundButton(
                 loading: isLoading,
                 title: "Add",
@@ -51,10 +54,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     isLoading = true;
                   });
 
-                  String id = DateTime.now().microsecondsSinceEpoch.toString();
-                  databaseRef.child(id).set({
+                  String postId = DateTime.now().microsecondsSinceEpoch.toString();
+                  String id = auth.currentUser!.uid;
+                  databaseRef.child(postId).set({
                     "title": postController.text.toString(),
-                    'id': id
+                    'id': id,
+                    'time' : DateTime.now().toString()
                   }).then((value) {
                     Utility().toastMessage("Post Added");
                     setState(() {
