@@ -99,7 +99,7 @@ class _PostScreenState extends State<PostScreen> {
                                     onTap: () {
                                       Navigator.pop(context);
                                       showMyDialog(title,
-                                          snapshot.child('id').value.toString());
+                                          snapshot.child('postId').value.toString());
                                     },
                                     leading: Icon(Icons.edit),
                                     title: Text('Edit'),
@@ -111,7 +111,7 @@ class _PostScreenState extends State<PostScreen> {
                                       Navigator.pop(context);
                                       ref
                                           .child(
-                                              snapshot.child('id').value.toString())
+                                              snapshot.child('postId').value.toString())
                                           .remove();
                                       Utility().toastMessage('Deleted');
                                     },
