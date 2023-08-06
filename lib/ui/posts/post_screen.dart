@@ -32,7 +32,7 @@ class _PostScreenState extends State<PostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("post"),
+        title: const Text(" Diary"),
         actions: [
           IconButton(
               onPressed: () {
@@ -69,11 +69,13 @@ class _PostScreenState extends State<PostScreen> {
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Expanded(
             child: FirebaseAnimatedList(
+              duration: Duration(milliseconds: 1000),
+              physics: ScrollPhysics(parent: BouncingScrollPhysics()),
                 defaultChild: Text('Hello'),
                 query: ref,
                 itemBuilder: (context, snapshot, animation, index) {
@@ -82,38 +84,43 @@ class _PostScreenState extends State<PostScreen> {
                   if ((searchFilter.text.isEmpty) &&
                       (snapshot.child('id').value.toString() ==
                           auth.currentUser!.uid.toString())) {
-                    return ListTile(
-                      title: Text(snapshot.child('title').value.toString()),
-                      subtitle: Text(snapshot.child('time').value.toString()),
-                      trailing: PopupMenuButton(
-                        icon: Icon(Icons.more_vert),
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                              value: 1,
-                              child: ListTile(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  showMyDialog(title,
-                                      snapshot.child('id').value.toString());
-                                },
-                                leading: Icon(Icons.edit),
-                                title: Text('Edit'),
-                              )),
-                          PopupMenuItem(
-                              value: 1,
-                              child: ListTile(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  ref
-                                      .child(
-                                          snapshot.child('id').value.toString())
-                                      .remove();
-                                  Utility().toastMessage('Deleted');
-                                },
-                                leading: Icon(Icons.delete),
-                                title: Text('Delete'),
-                              )),
-                        ],
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                      child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: Colors.deepPurple)),
+                        child: ListTile(
+                          title: Text(snapshot.child('title').value.toString()),
+                          subtitle: Text(snapshot.child('time').value.toString()),
+                          trailing: PopupMenuButton(
+                            icon: Icon(Icons.more_vert),
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                  value: 1,
+                                  child: ListTile(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      showMyDialog(title,
+                                          snapshot.child('id').value.toString());
+                                    },
+                                    leading: Icon(Icons.edit),
+                                    title: Text('Edit'),
+                                  )),
+                              PopupMenuItem(
+                                  value: 1,
+                                  child: ListTile(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      ref
+                                          .child(
+                                              snapshot.child('id').value.toString())
+                                          .remove();
+                                      Utility().toastMessage('Deleted');
+                                    },
+                                    leading: Icon(Icons.delete),
+                                    title: Text('Delete'),
+                                  )),
+                            ],
+                          ),
+                        ),
                       ),
                     );
                   } else if ((snapshot.child('id').value.toString() ==
@@ -122,7 +129,7 @@ class _PostScreenState extends State<PostScreen> {
                           searchFilter.text.toLowerCase().toLowerCase()))) {
                     return ListTile(
                       title: Text(snapshot.child('title').value.toString()),
-                      subtitle: Text(snapshot.child('id').value.toString()),
+                      subtitle: Text(snapshot.child('time').value.toString()),
                     );
                   } else {
                     return Container();

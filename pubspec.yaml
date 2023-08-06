@@ -51,6 +51,7 @@ dependencies:
   google_ml_kit: ^0.16.2
   image: ^4.0.17
   lottie: ^2.3.2
+  rive: ^0.11.4
 
 
 
@@ -77,8 +78,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+   - assets/helix.riv
+   - assets/rotate.riv
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

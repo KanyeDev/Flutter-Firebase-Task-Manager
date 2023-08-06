@@ -77,65 +77,49 @@ class _AddPostScreenState extends State<AddPostScreen> {
             SizedBox(
               height: 50,
             ),
-            InkWell(
-              onTap: () {
-                if (topLeft == 0) {
-                  setState(() {
-                    color = Colors.deepPurpleAccent;
-                    topLeft = 20;
-                    topRight = 0;
-                    bottomLeft = 0;
-                    bottomRight = 20;
-                    icon = const Icon(Icons.remove);
-                  });
-                } else {
-                  setState(() {
-                    color = Colors.purple;
-                    topLeft = 0;
-                    topRight = 20;
-                    bottomLeft = 20;
-                    bottomRight = 0;
-                    icon = const Icon(Icons.add);
-                  });
-                }
-              },
-              child: AnimatedContainer(
-                height: 60.0,
-                width: 300.0,
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(topRight),
-                      bottomLeft: Radius.circular(bottomLeft),
-                      bottomRight: Radius.circular(bottomRight),
-                      topLeft: Radius.circular(topLeft)),
-                ),
-                duration: Duration(seconds: 1),
-                child: icon,
-              ),
-            ),
+
+
+            ///the moving button
+            // InkWell(
+            //   onTap: () {
+            //     if (topLeft == 0) {
+            //       setState(() {
+            //         color = Colors.deepPurpleAccent;
+            //         topLeft = 20;
+            //         topRight = 0;
+            //         bottomLeft = 0;
+            //         bottomRight = 20;
+            //         icon = const Icon(Icons.remove);
+            //       });
+            //     } else {
+            //       setState(() {
+            //         color = Colors.purple;
+            //         topLeft = 0;
+            //         topRight = 20;
+            //         bottomLeft = 20;
+            //         bottomRight = 0;
+            //         icon = const Icon(Icons.add);
+            //       });
+            //     }
+            //   },
+            //   child: AnimatedContainer(
+            //     height: 60.0,
+            //     width: 300.0,
+            //     decoration: BoxDecoration(
+            //       color: color,
+            //       borderRadius: BorderRadius.only(
+            //           topRight: Radius.circular(topRight),
+            //           bottomLeft: Radius.circular(bottomLeft),
+            //           bottomRight: Radius.circular(bottomRight),
+            //           topLeft: Radius.circular(topLeft)),
+            //     ),
+            //     duration: Duration(seconds: 1),
+            //     child: icon,
+            //   ),
+            // ),
             SizedBox(
               height: 50,
             ),
-
-            ///TWEEN ANIMATION BUILDER
-            TweenAnimationBuilder(
-              duration: Duration(seconds: 1),
-              tween: Tween<double>(begin: 0, end: 1),
-              builder: (BuildContext context, double _value, Widget? child) {
-                return Opacity(
-                  opacity: _value,
-                  child: Padding(
-                    padding: EdgeInsets.only(top: _value *20),child: child,
-                  ),
-                );
-              },
-              child: const Text(
-                "Balablue",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-
 
 
 

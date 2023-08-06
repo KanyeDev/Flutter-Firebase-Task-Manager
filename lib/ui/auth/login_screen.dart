@@ -1,13 +1,14 @@
 import 'package:firebase/ui/auth/login_with_number.dart';
 import 'package:firebase/ui/auth/signup_screen.dart';
-import 'package:firebase/ui/firestore/firestore_list_screen.dart';
 import 'package:firebase/ui/forgot_password.dart';
-import 'package:firebase/ui/posts/post_screen.dart';
 import 'package:firebase/utility/utility.dart';
 import 'package:firebase/widgets/round_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
+import 'iris_recognition.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
         .then((value) {
       Utility().toastMessage(value.user!.email.toString());
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const PostScreen()));
+          context, MaterialPageRoute(builder: (context) => const IrisRecognition()));
       setState(() {
         isLoading = false;
       });
@@ -127,26 +128,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 5,
               ),
               Align(alignment: Alignment.centerRight,
-                child: Column(
-                  children: [
-                    // IconButton(onPressed: _authenticate,
-                    //     icon: const Icon(Icons.panorama_fish_eye)),
-                    // if(_support_state)
-                    //   const Text('This device is supported')
-                    // else
-                    //   const Text('This device is not supported'),
-                    Row(children: [
-
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ForgotPasswordScreen()));
-                          },
-                          child: Text('Forgot Password?')),
-                    ],)
-
-                  ],
-                ),
+                child:  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotPasswordScreen()));
+                    },
+                    child: Text('Forgot Password?')),
               ),
               SizedBox(
                 height: 30.0,
